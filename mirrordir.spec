@@ -10,7 +10,7 @@
 Name: mirrordir
 Summary: Easy to use ftp mirroring package
 Version: 0.10.49
-Release: %mkrel 8
+Release: %mkrel 9
 Source: ftp://ftp.obsidian.co.za/pub/mirrordir/mirrordir-%{version}.tar.bz2
 Patch0: mirrordir-0.10.49-confpath.patch
 Patch1: mirrordir-zlib-1.1.3-zfree.patch
@@ -30,7 +30,7 @@ Easy to use ftp mirroring package - simply use
 mirrordir ftp://some.where.com/dir /some/local/dir
 
 %package -n %libname1
-Summary: The mirrordirz library, necessary to run mirrordir.
+Summary: Library necessary to run mirrordir
 Group: System/Libraries
 
 %description -n %libname1
