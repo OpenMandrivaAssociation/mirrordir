@@ -75,6 +75,8 @@ rm -rf $RPM_BUILD_ROOT
 echo "AC_PREREQ(2.50)" > configure.ac
 cat configure.in >> configure.ac
 rm -f configure.in
+rm -f ltmain.sh 
+libtoolize -c
 aclocal-1.4
 automake-1.4
 autoconf
