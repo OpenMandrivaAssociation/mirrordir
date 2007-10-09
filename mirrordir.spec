@@ -30,7 +30,7 @@ Easy to use ftp mirroring package - simply use
 mirrordir ftp://some.where.com/dir /some/local/dir
 
 %package -n %libname2
-Summary: The diffie library, necessary to run mirrordir.
+Summary: The diffie library, necessary to run mirrordir
 Group: System/Libraries
 
 %description -n %libname2
