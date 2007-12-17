@@ -20,7 +20,6 @@ Patch5: mirrordir-use-system-libs.patch
 BuildRequires: automake1.4, autoconf2.5 zlib-devel
 Group: Networking/File transfer 
 URL: ftp://ftp.obsidian.co.za/pub/mirrordir/
-BuildRoot: %_tmppath/%name-%version-root
 License: GPL
 Prefix: %{_prefix}
 Requires: %libname2 = %version
