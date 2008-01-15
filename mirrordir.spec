@@ -8,7 +8,7 @@
 Name: mirrordir
 Summary: Easy to use ftp mirroring package
 Version: 0.10.49
-Release: %mkrel 9
+Release: %mkrel 11
 Source: ftp://ftp.obsidian.co.za/pub/mirrordir/mirrordir-%{version}.tar.bz2
 Patch0: mirrordir-0.10.49-confpath.patch
 Patch1: mirrordir-zlib-1.1.3-zfree.patch
