@@ -78,9 +78,13 @@ perl -p -i -e 's/-f \$\(bindir\)\/mirrordir \$/-f \$\(bindir\)\/mirrordir \$\(DE
 make install DESTDIR=$RPM_BUILD_ROOT 
 
 
+%if %mdkversion < 200900
 %post -n %libname2 -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %postun -n %libname2 -p /sbin/ldconfig
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT 
