@@ -4,6 +4,7 @@
 
 %define name2 diffie
 %define libname2 %mklibname %name2 1
+%define develname %mklibname -d %name2
 
 Name: mirrordir
 Summary: Easy to use ftp mirroring package
@@ -21,8 +22,7 @@ BuildRequires: automake1.4, autoconf2.5 zlib-devel
 Group: Networking/File transfer 
 URL: ftp://ftp.obsidian.co.za/pub/mirrordir/
 BuildRoot: %_tmppath/%name-%version-root
-License: GPL
-Prefix: %{_prefix}
+License: GPLv2+
 Requires: %libname2 = %version
 
 %description
@@ -36,18 +36,18 @@ Group: System/Libraries
 %description -n %libname2
 The diffie library, necessary to run mirrordir.
 
-%package -n %{libname2}-devel
+%package -n %{develname}
 Summary: Static version of the diffie library
 Group: Development/C
 Requires: %libname2 = %{version}
-Provides: lib%{name2}-devel
+Provides: lib%{name2}-devel = %version
+Provides: %name-devel = %version
+Obsoletes: %{mklibname -d %name2 1}
 
-%description -n %{libname2}-devel
+%description -n %{develname}
 Static version of the diffie library
 
 %prep
-rm -rf $RPM_BUILD_ROOT
-
 %setup -q
 %patch0 -p1 -b .confpath
 %patch1 -p1 -b .zfree
@@ -67,9 +67,8 @@ automake-1.4
 autoconf
 
 %build
-%configure --enable-zlib
+%configure2_5x --enable-zlib
 %make
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -104,10 +103,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS BUGS COPYING README NEWS THANKS TODO
 %{_libdir}/lib%{name2}.so.*
 
-%files -n %{libname2}-devel
+%files -n %{develname}
 %defattr(-,root,root,755)
 %doc AUTHORS BUGS COPYING README NEWS THANKS TODO
 %{_libdir}/lib%{name2}.so
 %{_libdir}/lib%{name2}.a
 %{_libdir}/lib%{name2}.la
-
