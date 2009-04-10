@@ -18,7 +18,9 @@ Patch3: mirrordir-0.10.49-64bit-fixes.patch
 Patch4: mirrordir-0.10.49-pam_pwdb.patch
 # (tv) use system zlib:
 Patch5: mirrordir-use-system-libs.patch
-BuildRequires: automake1.4, autoconf2.5 zlib-devel
+Patch6: mirrordir-0.10.49-fix-str-fmt.patch
+Patch7: mirrordir-0.10.49-fix-install.patch
+BuildRequires: automake autoconf zlib-devel
 Group: Networking/File transfer 
 URL: ftp://ftp.obsidian.co.za/pub/mirrordir/
 BuildRoot: %_tmppath/%name-%version-root
@@ -55,26 +57,18 @@ Static version of the diffie library
 %patch3 -p1 -b .64bit-fixes
 %patch4 -p1 -b .pam_pwdb
 %patch5 -p1 -b .sys_libs
-# XXX workaround another abelism concerning autoconf (aka,
-# WANT_AUTOCONF_2_5 is a no-op nowadays...)
-echo "AC_PREREQ(2.50)" > configure.ac
-cat configure.in >> configure.ac
-rm -f configure.in
-rm -f ltmain.sh 
-libtoolize -c
-aclocal-1.4
-automake-1.4
-autoconf
+%patch6 -p1 -b .str
+%patch7 -p1 -b .install
 
 %build
+autoreconf -fi
 %configure2_5x --enable-zlib
 %make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-perl -p -i -e 's/-f \$\(bindir\)\/mirrordir \$/-f \$\(bindir\)\/mirrordir \$\(DESTDIR\)\$/' src/Makefile
-make install DESTDIR=$RPM_BUILD_ROOT 
+%makeinstall_std
 
 
 %if %mdkversion < 200900
