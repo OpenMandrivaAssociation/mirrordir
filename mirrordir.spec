@@ -9,7 +9,7 @@
 Name: mirrordir
 Summary: Easy to use ftp mirroring package
 Version: 0.10.49
-Release: %mkrel 15
+Release: %mkrel 16
 Source: ftp://ftp.obsidian.co.za/pub/mirrordir/mirrordir-%{version}.tar.bz2
 Patch0: mirrordir-0.10.49-confpath.patch
 Patch1: mirrordir-zlib-1.1.3-zfree.patch
@@ -62,7 +62,8 @@ Static version of the diffie library
 
 %build
 autoreconf -fi
-%configure2_5x --enable-zlib
+%configure2_5x --enable-zlib \
+	CFLAGS="-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE"
 %make
 
 %install
