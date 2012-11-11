@@ -1,0 +1,11 @@
+--- mirrordir-0.10.49/vfs/secure-mcserv.c.str	2009-04-10 17:31:58.000000000 +0200
++++ mirrordir-0.10.49/vfs/secure-mcserv.c	2009-04-10 17:32:06.000000000 +0200
+@@ -1990,7 +1990,7 @@
+ 
+ void vfs_die( char *m )
+ {
+-    fprintf (stderr,m);
++    fprintf (stderr,"%s",m);
+     exit (1);
+ }
+ 

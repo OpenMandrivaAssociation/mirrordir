@@ -1,0 +1,51 @@
+--- ./vfs/Makefile.am.tv	2007-08-17 12:17:38.000000000 +0200
++++ ./vfs/Makefile.am	2007-08-17 12:18:11.000000000 +0200
+@@ -2,7 +2,7 @@
+ bin_PROGRAMS = secure-mcserv
+ 
+ secure_mcserv_SOURCES = secure-mcserv.c mad.c
+-secure_mcserv_LDADD =  tcputil.o ../diffie/libdiffie.la ../zlib/libmirrordirz.la $(SHADOWLIB) $(PAMLIBS) $(WRAPLIB) $(NSLLIB)
++secure_mcserv_LDADD =  tcputil.o ../diffie/libdiffie.la $(SHADOWLIB) $(PAMLIBS) $(WRAPLIB) $(NSLLIB)
+ 
+ libvfs_a_SOURCES = container.c container.h ftpfs.c ftpfs.h local.c mad.h \
+ 	tcputil.c tcputil.h vfs.c vfs.h names.h names.c util.h util.c \
+--- ./configure.in.tv	2007-08-17 11:59:11.000000000 +0200
++++ ./configure.in	2007-08-17 12:11:49.000000000 +0200
+@@ -181,6 +181,14 @@
+ AC_CHECK_FUNCS(sysconf waitpid getpwuid getgrgid setreuid inet_ntoa)
+ AC_CHECK_FUNCS(setsid setpgrp tcsetpgrp)
+ 
++
++AC_ARG_ENABLE(zlib,
++[  --enable-zlib               Handle gzipped modules],
++[if test "$enableval" = "yes"; then
++	LIBS="$LIBS -lz"
++fi])
++
++
+ dnl for tcpwrappers libwrap to check /etc/hosts.allow file in secure-mcserv
+ WRAPLIB=
+ NSLLIB=
+@@ -272,5 +280,5 @@
+ 
+ AC_DEFINE(INSTALL_PREFIX, $prefix)
+ 
+-AC_OUTPUT(Makefile zlib/Makefile diffie/Makefile vfs/Makefile src/Makefile pam/Makefile doc/Makefile scripts/Makefile mirrordir.spec)
++AC_OUTPUT(Makefile diffie/Makefile vfs/Makefile src/Makefile pam/Makefile doc/Makefile scripts/Makefile mirrordir.spec)
+ 
+--- ./Makefile.am.tv	2007-08-17 12:10:41.000000000 +0200
++++ ./Makefile.am	2007-08-17 12:11:15.000000000 +0200
+@@ -1 +4294967291 @@
+-SUBDIRS = zlib diffie vfs src doc pam scripts
++SUBDIRS = diffie vfs src doc pam scripts
+--- ./src/Makefile.am.tv	2007-08-17 12:26:40.000000000 +0200
++++ ./src/Makefile.am	2007-08-17 12:26:46.000000000 +0200
+@@ -35,7 +29,7 @@
+ copydir:
+ 	$(LN_S) -f mirrordir copydir
+ 
+-LDADD = ../vfs/libvfs.a ../diffie/libdiffie.la ../zlib/libmirrordirz.la
++LDADD = ../vfs/libvfs.a ../diffie/libdiffie.la
+ 
+ INCLUDES = -I$(top_srcdir) -DSYSCONFDIR=\""$(sysconfdir)"\"
+ 

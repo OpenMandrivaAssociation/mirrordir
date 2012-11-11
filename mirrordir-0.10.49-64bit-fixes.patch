@@ -1,0 +1,23 @@
+--- mirrordir-0.10.49/src/tar.c.64bit-fixes	1999-11-23 03:40:09.000000000 -0500
++++ mirrordir-0.10.49/src/tar.c	2005-08-23 09:25:55.000000000 -0400
+@@ -18,6 +18,7 @@
+    02111-1307, USA.
+  */
+ 
++#include <string.h>
+ #include "mostincludes.h"
+ #ifdef HAVE_PWD_H
+ #include <pwd.h>
+@@ -37,6 +38,12 @@ void tar_init (char *tar_file_name);
+ void tar_shut (void);
+ int tar_append (char *file, char *arch_name, struct stat *s);
+ 
++/* functions.c */
++extern long dev_to_long (dev_t dev);
++
++/* hardlink.c */
++extern char *retrieve_link (void);
++
+ struct passwd *cached_getpwuid (pid_t pid);
+ struct group *cached_getgrgid (gid_t gid);
+ 

@@ -1,0 +1,12 @@
+--- mirrordir-0.10.49/pam/secure-mcserv.pam_pwdb	1999-11-23 09:40:09.000000000 +0100
++++ mirrordir-0.10.49/pam/secure-mcserv	2006-01-30 23:26:02.000000000 +0100
+@@ -1,6 +1,6 @@
+ #%PAM-1.0
+ auth       required	pam_listfile.so item=user sense=deny file=/etc/secure-mcservusers onerr=succeed
+-auth       required	pam_pwdb.so shadow nullok
++auth       required	pam_unix.so shadow nullok
+ auth       required	pam_shells.so
+-account    required	pam_pwdb.so
+-session    required	pam_pwdb.so
++account    required	pam_unix.so
++session    required	pam_unix.so

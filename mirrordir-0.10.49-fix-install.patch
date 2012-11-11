@@ -1,0 +1,38 @@
+--- mirrordir-0.10.49-intl.orig/src/Makefile.am
++++ mirrordir-0.10.49-intl/src/Makefile.am
+@@ -1,4 +1,4 @@
+-bin_PROGRAMS = mirrordir pslogin copydir recursdir forward
++bin_PROGRAMS = mirrordir forward
+ noinst_PROGRAMS = mksock
+ 
+ mksock_SOURCES = mksock.c
+@@ -13,18 +13,18 @@
+ TESTS = chk
+ 
+ install-exec-hook:
+-	$(LN_S) -f $(bindir)/mirrordir $(bindir)/copydir
+-	$(LN_S) -f $(bindir)/mirrordir $(bindir)/recursdir
+-	$(LN_S) -f $(bindir)/mirrordir $(bindir)/pslogin
++	$(LN_S) -f mirrordir $(DESTDIR)/$(bindir)/copydir
++	$(LN_S) -f mirrordir $(DESTDIR)/$(bindir)/recursdir
++	$(LN_S) -f mirrordir $(DESTDIR)/$(bindir)/pslogin
++
++mostlyclean-local:
++	-rm -f copydir recursdir pslogin
++uninstall-local:
++	for p in copydir recursdir pslogin; do \
++	  echo " rm -f $(DESTDIR)$(bindir)/$$p"; \
++	  rm -f $(DESTDIR)$(bindir)/$$p; \
++	done
+ 
+-pslogin.o:
+-	@echo ""
+-
+-recursdir.o:
+-	@echo ""
+-
+-copydir.o:
+-	@echo ""
+ 
+ pslogin:
+ 	$(LN_S) -f mirrordir pslogin

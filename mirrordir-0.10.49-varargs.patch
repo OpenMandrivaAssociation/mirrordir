@@ -1,0 +1,23 @@
+--- mirrordir-0.10.49/vfs/secure-mcserv.c.varargs	2000-01-16 16:22:42.000000000 -0500
++++ mirrordir-0.10.49/vfs/secure-mcserv.c	2005-08-23 09:20:43.000000000 -0400
+@@ -52,6 +52,11 @@
+ #include "diffie/compat.h"
+ #include "mad.h"
+ 
++#include <sys/types.h>
++#include <sys/wait.h>
++#include <utmp.h>
++#include <pty.h>
++
+ #ifdef HAVE_WRAP
+ #include <tcpd.h>
+ int allow_severity = 1;
+@@ -1479,7 +1484,7 @@ void xdo_shell (void)
+ /* execute login */
+ 	execl ("/bin/login", "login", "-p",
+ 	       "-h", strdup (inet_ntoa (client_addr)),
+-	       "-f", client_user, 0);
++	       "-f", client_user, NULL);
+ 
+ /* not reached */
+ 	exit (1);
