@@ -9,7 +9,7 @@
 Name: mirrordir
 Summary: Easy to use ftp mirroring package
 Version: 0.10.49
-Release: %mkrel 18
+Release: 19
 Source: ftp://ftp.obsidian.co.za/pub/mirrordir/mirrordir-%{version}.tar.bz2
 Patch0: mirrordir-0.10.49-confpath.patch
 Patch1: mirrordir-zlib-1.1.3-zfree.patch
@@ -20,10 +20,10 @@ Patch4: mirrordir-0.10.49-pam_pwdb.patch
 Patch5: mirrordir-use-system-libs.patch
 Patch6: mirrordir-0.10.49-fix-str-fmt.patch
 Patch7: mirrordir-0.10.49-fix-install.patch
+Patch8: mirrordir-automake-1.13.patch
 BuildRequires: automake autoconf zlib-devel
 Group: Networking/File transfer 
 URL: ftp://ftp.obsidian.co.za/pub/mirrordir/
-BuildRoot: %_tmppath/%name-%version-root
 License: GPLv2+
 Requires: %libname2 = %version
 
@@ -51,19 +51,13 @@ Static version of the diffie library
 
 %prep
 %setup -q
-%patch0 -p1 -b .confpath
-%patch1 -p1 -b .zfree
-%patch2 -p1 -b .varargs
-%patch3 -p1 -b .64bit-fixes
-%patch4 -p1 -b .pam_pwdb
-%patch5 -p1 -b .sys_libs
-%patch6 -p1 -b .str
-%patch7 -p1 -b .install
+%apply_patches
 
 %build
 autoreconf -fi
+# Forcing BFD to prevent mirrordir and forward from getting the same build ID
 %configure2_5x --enable-zlib \
-	CFLAGS="-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE"
+	CFLAGS="%optflags -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -fuse-ld=bfd"
 %make
 
 %install

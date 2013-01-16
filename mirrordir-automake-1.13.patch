@@ -1,0 +1,11 @@
+--- mirrordir-0.10.49/configure.in.bero	2013-01-16 01:22:51.514470801 +0100
++++ mirrordir-0.10.49/configure.in	2013-01-16 01:22:59.118380001 +0100
+@@ -8,7 +8,7 @@ dnl Identify target.
+ version=`cat ./VERSION`
+ 
+ AM_INIT_AUTOMAKE(mirrordir, "$version")
+-AM_CONFIG_HEADER(config.h)
++AC_CONFIG_HEADERS([config.h])
+ 
+ dnl Define package and version.
+ dnl PACKAGE=mirrordir
