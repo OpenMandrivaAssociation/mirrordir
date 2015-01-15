@@ -50,8 +50,9 @@ autoreconf -fi
 
 %build
 # Forcing BFD to prevent mirrordir and forward from getting the same build ID
-%configure2_5x \
-	--disable-static \
+export CC=gcc
+export CXX=g++
+%configure \
 	--enable-zlib \
 	CFLAGS="%optflags -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -fuse-ld=bfd"
 %make
