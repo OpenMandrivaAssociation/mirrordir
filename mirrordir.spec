@@ -6,7 +6,7 @@
 Summary:	Easy to use ftp mirroring package
 Name:		mirrordir
 Version:	0.10.49
-Release:	28
+Release:	29
 Group:		Networking/File transfer 
 License:	GPLv2+
 Url:		ftp://ftp.obsidian.co.za/pub/mirrordir/
