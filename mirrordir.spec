@@ -21,6 +21,11 @@ Patch5:		mirrordir-use-system-libs.patch
 Patch6:		mirrordir-0.10.49-fix-str-fmt.patch
 Patch7:		mirrordir-0.10.49-fix-install.patch
 Patch8:		mirrordir-automake-1.13.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(zlib)
 
 %description
